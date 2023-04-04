@@ -27,7 +27,6 @@ export default function UserDashboard() {
       {openEditModal && (
         <EditModal setOpenModal={setEditOpenModal} editEvent={editEvent} />
       )}
-
       <div className="w-full text-xs sm:text-sm mx-auto flex flex-col flex-1 gap-3 sm:gap-5">
         <div className="w-full flex justify-center items-center">
           <p className="text-xl">
@@ -82,19 +81,21 @@ export default function UserDashboard() {
                           <div className="border-t-2 border-neutral-100 py-3 px-6 dark:border-neutral-600 text-zinc-800 dark:text-zinc-800">
                             {new Date(v.date).toDateString()}
                           </div>
-                          <div className="border-t-2 border-neutral-100 py-3 px-6 dark:border-neutral-600 text-zinc-800 dark:text-zinc-800">
-                            <i
-                              onClick={() => {
-                                setEditEvent(v);
-                                setEditOpenModal(true);
-                              }}
-                              className="fa-solid fa-pencil px-2 text-zinc-600 duration-300 hover:rotate-45 cursor-pointer"
-                            ></i>
-                            <i
-                              onClick={handleDelete(v.id)}
-                              className="fa-solid fa-trash-can px-2 text-zinc-600 duration-300 hover:scale-125 cursor-pointer"
-                            ></i>
-                          </div>
+                          {currentUser.uid === v.createdBy && (
+                            <div className="border-t-2 border-neutral-100 py-3 px-6 dark:border-neutral-600 text-zinc-800 dark:text-zinc-800">
+                              <i
+                                onClick={() => {
+                                  setEditEvent(v);
+                                  setEditOpenModal(true);
+                                }}
+                                className="fa-solid fa-pencil px-2 text-zinc-600 duration-300 hover:rotate-45 cursor-pointer"
+                              ></i>
+                              <i
+                                onClick={handleDelete(v.id)}
+                                className="fa-solid fa-trash-can px-2 text-zinc-600 duration-300 hover:scale-125 cursor-pointer"
+                              ></i>
+                            </div>
+                          )}
                         </div>
                       </div>
                     );
@@ -104,6 +105,7 @@ export default function UserDashboard() {
           </>
         )}
       </div>
+      z
     </>
   );
 }
